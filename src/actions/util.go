@@ -10,8 +10,8 @@ import (
 
 func SendMail(msg string) error {
 	// Sender data.
-	from := "<Email de envio>"
-	password := "<senha>"
+	from := "<Email>"
+	password := "<Password>"
 
 	// Receiver email address.
 	to := []string{
