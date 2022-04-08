@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "5c17fe13-9387-4975-befe-512212bbb2e0",
+		"name": "go_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "articles all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/articles?page=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"articles"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/articles/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"articles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles new",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"featured\": false,\n    \"title\": \"Test\",\n    \"url\": \"test\",\n    \"imageUrl\": \"test\",\n    \"newsSite\": \"test\",\n    \"summary\": \"test\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/articles",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles sync",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/articles/sync",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"articles",
+						"sync"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"featured\": false,\n    \"title\": \"test update\",\n    \"url\": \"test url update\",\n    \"imageUrl\": \"test\",\n    \"newsSite\": \"test\",\n    \"summary\": \"test\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/articles/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"articles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/articles/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"articles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

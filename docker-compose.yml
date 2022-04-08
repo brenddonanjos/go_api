@@ -1,0 +1,43 @@
+version: '3.6'
+
+services:
+  backend:
+    build: .
+    container_name: backend
+    volumes:
+      - ./:/go/src
+    ports:
+      - 8000:8000
+    depends_on:
+      - mysql
+    command: bash -c "cd src && GOOS=linux go build main.go && air && go run main.go"
+    networks:
+      - nt_main
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_HOST: localhost
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: go_api_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    cap_add:
+      - SYS_NICE 
+    volumes:
+      - ./src/database/mysql:/var/lib/mysql
+      - ./src/database/migrations:/docker-entrypoint-initdb.d
+    networks:
+      - nt_main
+
+networks:
+  nt_main:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.28.1.0/16"

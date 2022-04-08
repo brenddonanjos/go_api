@@ -1,0 +1,306 @@
+openapi: 3.0.1
+info:
+  title: GO API
+  description: Documentation from go_api test project
+  version: 1.0.0
+servers:
+# Added by API Auto Mocking Plugin
+# Added by API Auto Mocking Plugin
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/brenddonanjos/go_api/1.0.0
+- description: SwaggerHub API Auto Mocking
+  url: http://127.0.0.1:8000
+paths:
+  /articles:
+    get:
+      summary: A list with all articles
+      parameters:
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+          description: Page number (10 elements per page are showing) 
+      responses:
+        '200':
+          description: A JSON array with all articles elements
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Article'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    post:
+      summary: Ceates a new article
+      requestBody:
+        description: Articles param to save on database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArticleReq'
+      responses:
+          '201':
+            description: Success response with the created object
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    success: 
+                      type: boolean
+                    message: 
+                      type: string
+                    body: 
+                      $ref: '#/components/schemas/ArticleResp'
+          '400':
+            description: Bad Request
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                  
+          '422':
+            description: Unprocessable Entity
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+          '500':
+            description: Internal Server Error
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+  /articles/{id}:
+    get:
+      summary: Get an article from a specific ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: Article ID
+      responses:
+        '200':
+          description: Article object related with ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    put:
+      summary: Update an article from a specific ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: Article ID
+      responses:
+          '201':
+            description: Success response with updated object
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    success: 
+                      type: boolean
+                    message: 
+                      type: string
+                    body: 
+                      $ref: '#/components/schemas/ArticleResp'
+          '400':
+            description: Bad Request
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                  
+          '422':
+            description: Unprocessable Entity
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+          '500':
+            description: Internal Server Error
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+    delete:
+      summary: Deletes an article from a specific ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: Article ID
+      responses:
+        '200':
+          description: Article deleted successfuly!
+          content: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  
+components:
+  schemas:
+    Article:
+      type: object
+      properties:
+        id: 
+          type: integer
+        featured: 
+          type: boolean
+        title: 
+          type: string
+        url: 
+          type: string
+        imageUrl: 
+          type: string
+        newsSite: 
+          type: string
+        summary: 
+          type: string
+        spaceFlightId:
+          type: integer
+        publishedAt:
+          type: string
+          format: date-time
+        createdAt: 
+          type: string
+          format: date-time
+        updatedAt: 
+          type: string
+          format: date-time
+        launches: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Launche'
+        events: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+    Launche:
+      type: object
+      properties:
+        id: 
+          type: integer
+        provider: 
+          type: string
+        spaceFlightId: 
+          type: string
+        articleId: 
+          type: integer
+        createdAt: 
+          type: string
+          format: date-time
+        updatedAt: 
+          type: string
+          format: date-time
+    Event:
+      type: object
+      properties:
+        id: 
+          type: integer
+        provider: 
+          type: string
+        spaceFlightId: 
+          type: integer
+        articleId: 
+          type: integer
+        createdAt: 
+          type: string
+          format: date-time
+        updatedAt: 
+          type: string
+          format: date-time
+    ArticleReq:
+      type: object
+      properties:
+        featured: 
+          type: boolean
+        title: 
+          type: string
+        url: 
+          type: string
+        imageUrl: 
+          type: string
+        newsSite: 
+          type: string
+        summary: 
+          type: string
+    ArticleResp:
+      type: object
+      properties: 
+        id: 
+          type: integer
+        featured: 
+          type: boolean
+        title: 
+          type: string
+        url: 
+          type: string
+        imageUrl: 
+          type: string
+        newsSite: 
+          type: string
+        summary: 
+          type: string
+        spaceFlightId:
+          type: integer
+        publishedAt:
+          type: string
+          format: date-time
+        createdAt: 
+          type: string
+          format: date-time
+        updatedAt: 
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        success: 
+          type: boolean
+          default: false
+        message:
+          type: string
