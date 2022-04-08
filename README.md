@@ -54,6 +54,7 @@ docker-compose up
 ## Documentation
 
 <div  id="docs">
+OBS. The CRON code is avaliable on main.go file!
 
 <h3>OpenApi doc</h3>
 
