@@ -1,8 +1,6 @@
 <p  align="center"><img  src="https://cdn.worldvectorlogo.com/logos/gopher.svg"  height="80"></p>
 <h2  align="center">Test project to external API communication</h2>
 
-<p  align="center">Made with GoLang and Echo Framework </p>
-
 <p  align="center">This system integrate with an external API and persists the data locally, executes the sync with a cron and do the CRUD operations</p>
 
   
